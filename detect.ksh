@@ -30,9 +30,29 @@ get_architecture ()
     # Query linux distribution
     if [ ${LARCH} = "linux" ]; then
       if [ -e /etc/SuSE-release ]; then
-        LINUX_DISTRIBUTION=suse
+        LINUX_DISTRIBUTION=SuSE
       elif [ -e /etc/redhat-release ]; then
         LINUX_DISTRIBUTION=Redhat
+      elif [ -e /etc/fedora-release ]; then
+        LINUX_DISTRIBUTION=Fedora
+      elif [ -e /etc/slackware-release ]; then
+        LINUX_DISTRIBUTION=Slackware
+      elif [ -e /etc/debian_release ]; then
+        LINUX_DISTRIBUTION=Debian
+      elif [ -e /etc/mandrake-release ]; then
+        LINUX_DISTRIBUTION=Mandrake
+      elif [ -e /etc/yellowdog-release ]; then
+        LINUX_DISTRIBUTION=YellowDog
+      elif [ -e /etc/release ]; then
+        LINUX_DISTRIBUTION=Solaris # flagged earlier
+      elif [ -e /etc/sun-release ]; then
+        LINUX_DISTRIBUTION=SunJDS
+      elif [ -e /etc/gentoo-release ]; then
+        LINUX_DISTRIBUTION=Gentoo
+      elif [ -e /etc/UnitedLinux-release ]; then
+        LINUX_DISTRIBUTION=UnitedLinux
+      elif [ -e /etc/lsb-release ]; then
+        LINUX_DISTRIBUTION=Ubuntu
       else
         LINUX_DISTRIBUTION=Unknown
       fi
@@ -40,15 +60,13 @@ get_architecture ()
   fi
   
   if [ -z "$LARCH" ]; then
-  	LARCH="Unknown platform `uname`"
+    LARCH="Unknown platform `uname`"
     exit 1
   fi
 
-  return 'foo'
+  return 0
 }
 
 arch=$(get_architecture)
-
-echo $arch
 
 exit 0
